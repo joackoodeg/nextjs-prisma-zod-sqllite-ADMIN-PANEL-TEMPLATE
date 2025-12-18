@@ -31,6 +31,9 @@ Template de administración con Next.js, Prisma, Turso SQLite y TypeScript.
 - **class-variance-authority** - Variantes de componentes
 - **clsx & tailwind-merge** - Utilidades para clases CSS
 
+### Visualización de Datos
+- **Recharts** - Librería de gráficos React para visualizaciones complejas y personalizables
+
 ## Conexión con Turso: Limitaciones y Soluciones
 
 ### ⚠️ Prisma no tiene soporte nativo para Turso
@@ -184,6 +187,8 @@ app/
   │   │   ├── users-header.tsx
   │   │   ├── users-table.tsx
   │   │   └── user-dialog.tsx
+  │   ├── analytics/        # Página de analytics
+  │   │   └── page.tsx      # Ejemplos de gráficos
   │   ├── layout.tsx        # Layout del dashboard
   │   └── page.tsx          # Página principal
   └── layout.tsx            # Layout raíz
@@ -193,6 +198,18 @@ components/
   │   ├── sidebar.tsx
   │   ├── navbar.tsx
   │   └── logo.tsx
+  ├── charts/               # Componentes de gráficos
+  │   ├── recharts/         # Componentes Recharts
+  │   │   ├── line-chart.tsx
+  │   │   ├── bar-chart.tsx
+  │   │   ├── area-chart.tsx
+  │   │   ├── pie-chart.tsx
+  │   │   ├── radar-chart.tsx
+  │   │   ├── scatter-chart.tsx
+  │   │   └── combo-chart.tsx
+  │   ├── kpi-card.tsx      # Tarjetas de KPI
+  │   ├── metric-card.tsx   # Tarjetas de métricas
+  │   └── chart-wrapper.tsx
   └── ui/                   # Componentes UI (shadcn/ui)
       ├── button.tsx
       ├── table.tsx
@@ -202,6 +219,10 @@ components/
 lib/
   ├── prisma.ts             # Cliente Prisma configurado para Turso
   ├── utils.ts              # Utilidades (cn, etc.)
+  ├── charts/               # Configuración y utilidades de gráficos
+  │   ├── chart-config.ts   # Configuración de colores y estilos
+  │   ├── chart-utils.ts     # Utilidades de formateo
+  │   └── sample-data.ts     # Datos de ejemplo
   └── validations/          # Schemas de validación Zod
       └── usuario.ts
 
@@ -237,6 +258,63 @@ scripts/
 - ✅ **Estadísticas (KPIs)** en tiempo real
 - ✅ **Type-safe** end-to-end con TypeScript y Prisma
 - ✅ **Componentes accesibles** con Radix UI
+- ✅ **Gráficos y visualizaciones** con Recharts
+
+## Gráficos y Visualización
+
+El template incluye una suite completa de componentes de gráficos usando **Recharts**.
+
+### Componentes Disponibles
+
+#### Recharts (Gráficos)
+- `LineChart` - Gráficos de líneas para tendencias temporales
+- `BarChart` - Gráficos de barras verticales y horizontales
+- `AreaChart` - Gráficos de áreas para datos acumulados
+- `PieChart` - Gráficos circulares para distribuciones
+- `RadarChart` - Gráficos radar para comparaciones multidimensionales
+- `ScatterChart` - Gráficos de dispersión para análisis de correlación
+- `ComboChart` - Gráficos combinados (barras + líneas + áreas)
+
+#### Componentes de Métricas (shadcn/ui)
+- `KPICard` - Tarjetas de KPI con tendencias y cambios porcentuales
+- `MetricCard` - Tarjetas de métricas simples
+
+### Uso Básico
+
+```typescript
+import { LineChart } from "@/components/charts/recharts/line-chart";
+import { ChartWrapper } from "@/components/charts/chart-wrapper";
+
+const data = [
+  { month: "Ene", sales: 1200 },
+  { month: "Feb", sales: 1900 },
+];
+
+<ChartWrapper title="Ventas Mensuales">
+  <LineChart
+    data={data}
+    dataKey="month"
+    lines={[{ key: "sales", name: "Ventas" }]}
+    xAxisKey="month"
+  />
+</ChartWrapper>
+```
+
+### Página de Ejemplo
+
+Visita `/analytics` para ver ejemplos de todos los tipos de gráficos disponibles con datos de muestra.
+
+### Configuración
+
+Los gráficos están configurados para usar automáticamente los colores del tema de Tailwind definidos en `lib/charts/chart-config.ts`. Puedes personalizar los colores modificando este archivo.
+
+### Utilidades
+
+El template incluye utilidades en `lib/charts/chart-utils.ts` para:
+- Formateo de moneda, números y porcentajes
+- Cálculo de cambios porcentuales
+- Formateo de fechas
+- Agrupación de datos
 
 ## Personalización
 
