@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "Prisma.prisma",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "pmneo.tsimporter",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "wix.vscode-import-cost",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "rangav.vscode-thunder-client",
+    "mikestead.dotenv",
+    "PKief.material-icon-theme",
+    "aaron-bond.better-comments"
+  ]
+}
+
